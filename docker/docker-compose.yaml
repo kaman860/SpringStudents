@@ -1,0 +1,20 @@
+version: '2'
+services:
+  students:
+    build: .
+    ports:
+    - "8080:8080"
+    depends_on:
+    - stdb
+  stdb:
+    image: postgres:10.4
+    ports:
+     - "5432:5432"
+    environment:
+     - POSTGRES_PASSWORD=postgres123
+     - POSTGRES_USER=postgres
+     - POSTGRES_DB=studentdb
+    volumes:
+     - sample_db:/var/lib/postgresql/data
+volumes:
+    sample_db: {}
